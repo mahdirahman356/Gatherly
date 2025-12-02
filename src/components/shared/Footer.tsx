@@ -17,7 +17,7 @@ export function Footer() {
               <div className="w-10 h-10 bg-linear-to-br from-(--color-primary) to-(--color-accent) rounded-lg flex items-center justify-center">
                 <UsersIcon className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-bold">EventBuddy</span>
+              <span className="text-xl font-bold">Gatherly</span>
             </div>
             <p className="text-gray-400 text-sm">
               Connect with like-minded people and never miss an event again.

@@ -18,7 +18,7 @@ export function Navbar() {
                             <UsersIcon className="w-6 h-6 text-white" />
                         </div>
                         <span className="text-xl font-bold text-(--color-dark)">
-                            EventBuddy
+                            Gatherly
                         </span>
                     </Link>
 
