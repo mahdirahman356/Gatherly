@@ -1,46 +1,40 @@
 "use client"
+import InputFieldError from "@/components/shared/InputFieldError";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { loginUser } from "@/services/auth/loginUser";
 import Link from "next/link";
-import { useState } from "react";
+import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
 
 const LoginForm = () => {
 
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    })
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        // Handle login logic
-        console.log('Login:', formData)
-    }
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        })
-    }
+    const [state, formAction, isPending] = useActionState(loginUser, null);
+
+    useEffect(() => {
+        if (state && !state.success && state.message) {
+            toast.error(state.message)
+        }
+    }, [state])
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form action={formAction} className="space-y-6">
             <Input
+                id="email"
                 type="email"
                 name="email"
                 placeholder="you@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
+
             />
+            <InputFieldError field="email" state={state} />
 
             <Input
+                id="password"
                 type="password"
                 name="password"
                 placeholder="Enter your password"
-                value={formData.password}
-                onChange={handleChange}
-                required
             />
+            <InputFieldError field="password" state={state} />
 
             <div className="flex items-center justify-between text-sm">
                 <label className="flex items-center">
@@ -54,9 +48,8 @@ const LoginForm = () => {
                     Forgot password?
                 </Link>
             </div>
-
-            <Button type="submit" size="lg" className="w-full">
-                Sign In
+            <Button type="submit" size="lg" className="w-full" disabled={isPending}>
+                {isPending ? "Logging in..." : "Login"}
             </Button>
         </form>
     );
