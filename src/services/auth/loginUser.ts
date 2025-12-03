@@ -3,7 +3,6 @@
 import { serverFetch } from "@/lib/server-fetch";
 import { loginValidationZodSchema } from "@/zod/auth.validation";
 import { parse } from "cookie";
-import jwt, { JwtPayload } from "jsonwebtoken";
 import { redirect } from "next/navigation";
 import { setCookie } from "./tokenHandlers";
 import { zodValidator } from "@/lib/zodValidator";

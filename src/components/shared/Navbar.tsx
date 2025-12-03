@@ -1,13 +1,16 @@
-"use client"
-import React, { useState } from 'react'
-import { UsersIcon, MenuIcon, XIcon } from 'lucide-react'
+import { UsersIcon, MenuIcon } from 'lucide-react'
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import Link from 'next/link'
 import { Button } from '../ui/button'
-import { usePathname } from 'next/navigation'
-export function Navbar() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const pathname = usePathname()
-    const isActive = (path: string) => pathname === path
+import { getUser } from '@/services/auth/getUser'
+import { getNavItemsByRole } from '@/lib/navItems.config';
+import LogoutButton from './LogoutButton';
+
+export async function Navbar() {
+    const isActive = (path: string) => "/" === path
+    const user = await getUser()
+    const navItems = getNavItemsByRole(user?.role)
+
     return (
         <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,65 +27,57 @@ export function Navbar() {
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-8">
-                        <Link
-                            href="/explore"
-                            className={`font-medium transition-colors ${isActive('/explore') ? 'text-(--color-primary)' : 'text-(--color-gray) hover:text-(--color-primary)'}`}
-                        >
-                            Explore Events
-                        </Link>
-                        <Link
-                            href="/become-host"
-                            className={`font-medium transition-colors ${isActive('/become-host') ? 'text-(--color-primary)' : 'text-(--color-gray) hover:text-(--color-primary)'}`}
-                        >
-                            Become a Host
-                        </Link>
-                        <Link href="/login">
-                            <Button variant="outline" size="sm">
-                                Login
-                            </Button>
-                        </Link>
+                        {navItems.map((link) => (
+                            <Link
+                                key={link.label}
+                                href={link.href}
+                                className={`font-medium transition-colors ${isActive(`${link.href}`) ? 'text-(--color-primary)' : 'text-(--color-gray) hover:text-(--color-primary)'}`}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+
+                        {user
+                            ? <LogoutButton />
+                            : <Link href="/login">
+                                <Button variant="outline" className="bg-primary text-primary-foreground">Login</Button>
+                            </Link>
+                        }
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="md:hidden p-2"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        aria-label="Toggle menu"
-                    >
-                        {mobileMenuOpen ? (
-                            <XIcon className="w-6 h-6 text-(--color-dark)" />
-                        ) : (
-                            <MenuIcon className="w-6 h-6 text-(--color-dark)" />
-                        )}
-                    </button>
+                    <div className="md:hidden">
+                        <Sheet>
+                            <SheetTrigger asChild>
+                                <MenuIcon />
+                            </SheetTrigger>
+                            <SheetContent side="right" className="w-[300px] sm:w-[400px] p-4">
+                                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+
+                                <div className="py-4">
+                                    <div className="flex flex-col space-y-4">
+
+                                        {navItems.map((link) => (
+                                            <Link
+                                                key={link.label}
+                                                href={link.href}
+                                                className="font-medium text-(--color-gray) hover:text-(--color-primary)"
+                                            >
+                                                {link.label}
+                                            </Link>
+                                        ))}
+
+                                        {user
+                                            ? <LogoutButton />
+                                            : <Link href="/login">
+                                                <Button variant="outline" className="bg-primary text-primary-foreground">Login</Button>
+                                            </Link>
+                                        }
+                                    </div>
+                                </div>
+                            </SheetContent>
+                        </Sheet>
+                    </div>
                 </div>
-
-                {/* Mobile Menu */}
-                {mobileMenuOpen && (
-                    <div className="md:hidden py-4 border-t border-gray-200">
-                        <div className="flex flex-col space-y-4">
-                            <Link
-                                href="/explore"
-                                className="font-medium text-(--color-gray) hover:text-(--color-primary)"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                Explore Events
-                            </Link>
-                            <Link
-                                href="/become-host"
-                                className="font-medium text-(--color-gray) hover:text-(--color-primary)"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                Become a Host
-                            </Link>
-                            <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                                <Button variant="outline" size="sm" className="w-full">
-                                    Login
-                                </Button>
-                            </Link>
-                        </div>
-                    </div>
-                )}
             </div>
         </nav>
     )
