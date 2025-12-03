@@ -8,24 +8,23 @@ const publicNavItems = [
 const userNavItems = [
     { href: "/", label: "Home" },
     { href: "/events", label: "Explore Events" },
-    { href: "/my-events", label: "My Events" },
+    { href: "/dashboard/upcoming", label: "My Events" },
     { href: "/profile", label: "Profile" },
 ];
 const hostNavItems = [
     { href: "/", label: "Home" },
     { href: "/events", label: "Explore Events" },
-    { href: "/my-events", label: "My Events" },
-    { href: "/create-event", label: "Create Event" },
+    { href: "/host/dashboard/events", label: "Create Event" },
     { href: "/profile", label: "Profile" },
 ];
 
 const adminNavItems = [
     { href: "/", label: "Home" },
-    { href: "/manage-users", label: "Manage Users" },
-    { href: "/manage-hosts", label: "Manage Hosts" },
-    { href: "/manage-events", label: "Manage Events" },
+    { href: "/admin/dashboard/users", label: "Manage Users" },
+    { href: "/admin/dashboard/hosts", label: "Manage Hosts" },
+    { href: "/admin/dashboard/events", label: "Manage Events" },
     { href: "/profile", label: "Profile" },
-    { href: "admin/dashboard", label: "Admin Dashboard" },
+    { href: "/admin/dashboard", label: "Admin Dashboard" },
 ];
 
 export const getNavItemsByRole  = (role: UserRole) => {

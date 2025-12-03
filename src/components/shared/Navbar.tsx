@@ -17,7 +17,7 @@ export async function Navbar() {
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2 group">
-                        <div className="w-10 h-10 bg-linear-to-br from-(--color-primary) to-(--color-accent) rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                        <div className="w-10 h-10 bg-linear-to-br from-primary to-(--color-accent) rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
                             <UsersIcon className="w-6 h-6 text-white" />
                         </div>
                         <span className="text-xl font-bold text-(--color-dark)">
