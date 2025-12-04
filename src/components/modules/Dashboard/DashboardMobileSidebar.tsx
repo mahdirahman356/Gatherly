@@ -32,7 +32,7 @@ const DashboardMobileSidebar = ({
     };
     return (
         <div className=" flex h-full flex-col">
-            <div className="flex h-16 items-center border-b px-6">
+            <div className="flex h-16 items-center px-6 py-6">
                 {/* Logo */}
                 <Link href="/" className="flex items-center space-x-2 group">
                     <div className="w-10 h-10 bg-linear-to-br from-(--color-primary) to-(--color-accent) rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
@@ -46,7 +46,7 @@ const DashboardMobileSidebar = ({
             <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
 
             {/* Navigation */}
-            <ScrollArea className="flex-1 px-3 py-4">
+            <ScrollArea className="flex-1 px-3">
                 <nav className="flex-1 overflow-y-auto p-4">
                     <ul className="space-y-3">
                         {navItems.map((item) => {
@@ -56,10 +56,10 @@ const DashboardMobileSidebar = ({
                                 <li key={item.id}>
                                     <Link
                                         href={item.path}
-                                        className={`
-                    flex items-center justify-between px-4 py-2 rounded-lg transition-all
-                    ${isActive ? 'bg-(--color-primary) text-white shadow-sm' : 'text-(--color-gray) hover:bg-(--color-light-gray) hover:text-(--color-dark)'}
-                  `}
+                                        className={`flex items-center justify-between px-4 py-2 rounded-lg transition-all
+                                        ${isActive
+                                                ? 'bg-(--color-primary) text-white shadow-sm'
+                                                : 'text-(--color-gray) hover:bg-(--color-light-gray) hover:text-(--color-dark)'} `}
                                     >
                                         <div className="flex items-center space-x-3">
                                             <Icon className="w-5 h-5" />
@@ -67,10 +67,10 @@ const DashboardMobileSidebar = ({
                                         </div>
                                         {item.badge !== undefined && (
                                             <span
-                                                className={`
-                      px-2 py-0.5 rounded-full text-xs font-semibold
-                      ${isActive ? 'bg-white text-(--color-primary)' : 'bg-gray-200 text-(--color-gray)'}
-                    `}
+                                                className={`px-2 py-0.5 rounded-full text-xs font-semibold
+                                                 ${isActive
+                                                        ? 'bg-white text-(--color-primary)'
+                                                        : 'bg-gray-200 text-(--color-gray)'}`}
                                             >
                                                 {item.badge}
                                             </span>
@@ -88,7 +88,7 @@ const DashboardMobileSidebar = ({
                 <div className="flex items-center gap-3">
                     <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
                         <span className="text-sm font-semibold text-primary">
-                            {userInfo?.email}
+                            {userInfo.email.charAt(0).toUpperCase()}
                         </span>
                     </div>
                     <div className="flex-1 overflow-hidden">

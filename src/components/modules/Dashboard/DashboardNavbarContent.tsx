@@ -1,54 +1,19 @@
 "use client";
 import { IJWTPayload } from "@/types/user.interface";
-import { BookmarkIcon, CalendarIcon, HistoryIcon, LayoutDashboardIcon, MenuIcon, SettingsIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
 import { DashboardNavItem } from "@/types/dashboard.interface";
 import DashboardMobileSidebar from "./DashboardMobileSidebar";
-
-const navItems: DashboardNavItem[] = [
-    {
-      id: 'overview',
-      label: 'Overview',
-      icon: LayoutDashboardIcon,
-      path: '/dashboard',
-    },
-    {
-      id: 'upcoming',
-      label: 'Upcoming Events',
-      icon: CalendarIcon,
-      path: '/dashboard/upcoming',
-      badge: 3,
-    },
-    {
-      id: 'past',
-      label: 'Past Events',
-      icon: HistoryIcon,
-      path: '/dashboard/past',
-    },
-    {
-      id: 'saved',
-      label: 'Saved Events',
-      icon: BookmarkIcon,
-      path: '/dashboard/saved',
-      badge: 5,
-    },
-    {
-      id: 'settings',
-      label: 'Settings',
-      icon: SettingsIcon,
-      path: '/dashboard/settings',
-    },
-  ]
+import { MenuIcon } from "lucide-react";
 
 interface DashboardNavbarContentProps {
     userInfo:  IJWTPayload;
-    // navItems?: DashboardNavItem[];
+    navItems: DashboardNavItem[];
 }
 
 const DashboardNavbarContent = ({
     userInfo,
-    // navItems,
+    navItems,
 }: DashboardNavbarContentProps) => {
 
     const [isOpen, setIsOpen] = useState(false)
@@ -79,7 +44,7 @@ const DashboardNavbarContent = ({
                     <SheetContent side="left" className="w-64 p-0">
                         <DashboardMobileSidebar
                             userInfo={userInfo}
-                            navItems={navItems || []}
+                            navItems={navItems}
                         />
                     </SheetContent>
                 </Sheet>

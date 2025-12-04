@@ -1,7 +1,5 @@
-
 import { getDashboardNavItemsByRole } from "@/lib/dashboardNavItems.config";
 import DashboardSidebarContent from "./DashboardSidebarContent";
-
 import { getUser } from "@/services/auth/getUser";
 
 const DashboardSidebar = async () => {
