@@ -1,3 +1,4 @@
+import { IEvent } from "./event.interface";
 
 export type UserRole = "ADMIN" | "USER" | "HOST"
 export type UserStatus = "ACTIVE" | "INACTIVE" | "BLOCK" | "DELETED"
@@ -24,5 +25,7 @@ export interface IUser {
   status: UserStatus,
   createdAt: string; 
   profile: IUserProfile;
+  events: IEvent,
+  eventsCount: number
 }
 

@@ -4,7 +4,7 @@ import ManagementTable from "@/components/shared/ManagementTable";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { IUser } from "@/types/user.interface";
-import { userscolumns } from "./usersColumns";
+import { usersColumns } from "./usersColumns";
 import { toast } from "sonner";
 import { deleteUser } from "@/services/admin/usersManagement";
 import DeleteConfirmationDialog from "@/components/shared/DeleteConfirmationDialog";
@@ -61,7 +61,7 @@ export default function UserTable({
         <>
             <ManagementTable
                 data={users}
-                columns={userscolumns}
+                columns={usersColumns}
                 onEdit={handleEditClick}
                 onView={handleView}
                 onDelete={handleDelete}

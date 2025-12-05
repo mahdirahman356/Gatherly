@@ -4,31 +4,9 @@ import { Column } from "@/components/shared/ManagementTable";
 import { IUser } from "@/types/user.interface";
 import { format } from "date-fns";
 import Image from "next/image";
+import { statusStyles } from "../UserManagement/usersColumns";
 
-export const statusStyles: Record<string, { text: string; bg: string; dot: string }> = {
-    active: {
-        text: "text-emerald-600",
-        bg: "bg-emerald-100/60",
-        dot: "bg-emerald-500",
-    },
-    inactive: {
-        text: "text-yellow-600",
-        bg: "bg-yellow-100/60",
-        dot: "bg-yellow-500",
-    },
-    blocked: {
-        text: "text-red-600",
-        bg: "bg-red-100/60",
-        dot: "bg-red-500",
-    },
-    deleted: {
-        text: "text-gray-600",
-        bg: "bg-gray-200/60",
-        dot: "bg-gray-500",
-    },
-};
-
-export const usersColumns: Column<IUser>[] = [
+export const hostsColumns: Column<IUser>[] = [
     {
         key: 'profile',
         label: 'Profile',
@@ -81,6 +59,13 @@ export const usersColumns: Column<IUser>[] = [
                 </p>
             </div>
         )
+    },
+    {
+        key: 'eventsCount',
+        label: 'Total Events',
+        render: (row) => (
+            <p className="font-medium">{row.eventsCount}</p>
+        ),
     },
     {
         key: 'status',

@@ -16,6 +16,19 @@ export async function getUsers() {
         };
     }
 }
+export async function getHosts() {
+    try {
+        const response = await serverFetch.get(`/user?role=HOST`);
+        const result = await response.json();
+        return result;
+    } catch (error: any) {
+        console.log(error);
+        return {
+            success: false,
+            message: `${process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'}`
+        };
+    }
+}
 
 
 export async function changeUserRole(
