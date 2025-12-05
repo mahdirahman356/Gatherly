@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { IUser } from "@/types/user.interface";
 import { userscolumns } from "./usersColumns";
-import ChangeUserRoleDialog from "./ChangeUserRoleDialog";
 import { toast } from "sonner";
 import { deleteUser } from "@/services/admin/usersManagement";
 import DeleteConfirmationDialog from "@/components/shared/DeleteConfirmationDialog";
+import UpdateUserDialog from "./UpdateUserDialog";
 
 interface UserTableProps {
     users: IUser[];
@@ -18,7 +18,7 @@ export default function UserTable({
     users = [],
 }: UserTableProps) {
     const router = useRouter();
-    const [changingUserRole, setChangingUserRole] = useState<IUser | null>(null);
+    const [updatingUser, setUpdatingUser] = useState<IUser | null>(null);
     const [deletingUser, setDeletingUser] = useState<IUser | null>(null);
     const [isDeleting, setIsDeleting] = useState(false);
     const [, startTransition] = useTransition();
@@ -30,7 +30,7 @@ export default function UserTable({
     };
 
     const handleEditClick = (user: IUser) => {
-        setChangingUserRole(user);
+        setUpdatingUser(user);
     };
 
     const handleView = (user: IUser) => {
@@ -68,12 +68,12 @@ export default function UserTable({
             />
 
             {/* Change Status Dialog */}
-            {changingUserRole && (
-                <ChangeUserRoleDialog
-                    user={changingUserRole}
-                    isOpen={!!changingUserRole}
+            {updatingUser && (
+                <UpdateUserDialog
+                    user={updatingUser}
+                    isOpen={!!updatingUser}
                     onClose={() => {
-                        setChangingUserRole(null);
+                        setUpdatingUser(null);
                         router.refresh();
                     }}
                 />

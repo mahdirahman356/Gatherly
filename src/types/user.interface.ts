@@ -1,5 +1,6 @@
 
 export type UserRole = "ADMIN" | "USER" | "HOST"
+export type UserStatus = "ACTIVE" | "INACTIVE" | "BLOCK" | "DELETED"
 
 export interface IJWTPayload {
    email: string,
@@ -20,7 +21,8 @@ export interface IUser {
   id: string;
   email: string;
   role: UserRole,
-  createdAt: string; // ISO Date string
+  status: UserStatus,
+  createdAt: string; 
   profile: IUserProfile;
 }
 

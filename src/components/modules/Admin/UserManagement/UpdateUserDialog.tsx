@@ -17,8 +17,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { changeUserRole } from "@/services/admin/usersManagement";
-import { IUser, UserRole } from "@/types/user.interface";
+import { changeUserRole, changeUserStatus } from "@/services/admin/usersManagement";
+import { IUser, UserRole, UserStatus } from "@/types/user.interface";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -29,14 +29,14 @@ interface ChangeUserRoleDialogProps {
     onClose: () => void;
 }
 
-export default function ChangeUserRoleDialog({
+export default function UpdateUserDialog({
     user,
     isOpen,
     onClose,
 }: ChangeUserRoleDialogProps) {
-    const [newRole, setNewRole] = useState<UserRole>(
-        user.role
-    );
+    const [newRole, setNewRole] = useState<UserRole>(user.role);
+    const [newStatus, setNewStatus] = useState<UserStatus>(user.status);
+
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const roleOptions = [
@@ -45,8 +45,17 @@ export default function ChangeUserRoleDialog({
         { value: "ADMIN", label: "Admin" },
     ];
 
+    const statusOptions = [
+        { value: "ACTIVE", label: "Active" },
+        { value: "INACTIVE", label: "Inactive" },
+        { value: "BLOCKED", label: "Blocked" },
+    ];
+
     const handleSubmit = async () => {
-        if (newRole === user.role) {
+        const isRoleChanged = newRole !== user.role;
+        const isStatusChanged = newStatus !== user.status;
+
+        if (!isRoleChanged && !isStatusChanged) {
             toast.info("No changes made");
             onClose();
             return;
@@ -55,11 +64,14 @@ export default function ChangeUserRoleDialog({
         setIsSubmitting(true);
 
         try {
-            const result = await changeUserRole(user.id, newRole);
-
-            if (result.success) {
-                toast.success("User role updated successfully")
+            if (isRoleChanged) {
+                await changeUserRole(user.id, newRole);
             }
+
+            if (isStatusChanged) {
+                await changeUserStatus(user.id, newStatus);
+            }
+            toast.success("User updated successfully")
         } catch (error) {
             toast.error("An error occurred while updating role");
             console.error(error);
@@ -78,40 +90,33 @@ export default function ChangeUserRoleDialog({
         <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
             <DialogContent className="max-w-md">
                 <DialogHeader>
-                    <DialogTitle>Change User Role</DialogTitle>
+                    <DialogTitle>Change user role and status</DialogTitle>
                     <DialogDescription>
-                        Update the role for {user.profile.fullName}
+                        Update the role or status for {user.profile.fullName}
                     </DialogDescription>
                 </DialogHeader>
 
                 <div className="space-y-4 py-4">
-                    {/* Current Status */}
-                    <div className="space-y-2 flex items-center gap-2">
+                    {/* Current Role */}
+                    <div className="space-y-2">
                         <Label>Current Role</Label>
-                        <div className="flex items-center gap-x-2">
-                            <p className="px-3 py-1 mb-1 text-xs text-indigo-500 rounded-full dark:bg-gray-800 bg-indigo-100/60">
-                                {
-                                    roleOptions.find((opt) => opt.value === user.role)
-                                        ?.label
-                                }
-                            </p>
-                        </div>
+                        <p className="px-3 py-1 text-xs rounded-full bg-indigo-100 text-indigo-600 w-fit">
+                            {user.role}
+                        </p>
                     </div>
 
-                    {/* New Status */}
+                    {/* Change Role */}
                     <div className="space-y-2">
-                        <Label htmlFor="status">Change Role</Label>
+                        <Label>Change Role</Label>
                         <Select
                             value={newRole}
-                            onValueChange={(value) =>
-                                setNewRole(value as UserRole)
-                            }
+                            onValueChange={(value) => setNewRole(value as UserRole)}
                             disabled={isSubmitting}
                         >
-                            <SelectTrigger id="status" className="w-full">
-                                <SelectValue placeholder="Select status" />
+                            <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Select role" />
                             </SelectTrigger>
-                            <SelectContent className="w-full">
+                            <SelectContent>
                                 {roleOptions.map((option) => (
                                     <SelectItem key={option.value} value={option.value}>
                                         {option.label}
@@ -120,7 +125,38 @@ export default function ChangeUserRoleDialog({
                             </SelectContent>
                         </Select>
                     </div>
+
+                    {/* Current Status */}
+                    <div className="space-y-2">
+                        <Label>Current Status</Label>
+                        <p className="px-3 py-1 text-xs rounded-full bg-emerald-100 text-emerald-600 w-fit">
+                            {user.status}
+                        </p>
+                    </div>
+
+                    {/* Change Status */}
+                    <div className="space-y-2">
+                        <Label>Change Status</Label>
+                        <Select
+                            value={newStatus}
+                            onValueChange={(value) => setNewStatus(value as UserStatus)}
+                            disabled={isSubmitting}
+                        >
+                            <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Select status" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {statusOptions.map((option) => (
+                                    <SelectItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
                 </div>
+
+
 
                 <DialogFooter>
                     <Button

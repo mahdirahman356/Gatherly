@@ -3,6 +3,34 @@
 import { Column } from "@/components/shared/ManagementTable";
 import { IUser } from "@/types/user.interface";
 import { format } from "date-fns";
+import Image from "next/image";
+
+const statusStyles: Record<string, { text: string; bg: string; dot: string }> = {
+    active: {
+        text: "text-emerald-600",
+        bg: "bg-emerald-100/60",
+        dot: "bg-emerald-500",
+    },
+    inactive: {
+        text: "text-yellow-600",
+        bg: "bg-yellow-100/60",
+        dot: "bg-yellow-500",
+    },
+    blocked: {
+        text: "text-red-600",
+        bg: "bg-red-100/60",
+        dot: "bg-red-500",
+    },
+    deleted: {
+        text: "text-gray-600",
+        bg: "bg-gray-200/60",
+        dot: "bg-gray-500",
+    },
+};
+
+// const status = row?.status?.toLowerCase() || "active";
+// const currentStatus = statusStyles[status];
+
 
 export const userscolumns: Column<IUser>[] = [
     {
@@ -11,9 +39,20 @@ export const userscolumns: Column<IUser>[] = [
         render: (row: any) => (
             <div className="flex items-center gap-x-2">
                 <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="text-sm font-semibold text-primary">
+                    {row.profile.image ? (
+                        <>
+                            <Image
+                                src={row.profile.image}
+                                alt={row.profile.fullName}
+                                width={48}
+                                height={48}
+                                className="object-cover w-8 h-8 rounded-full"
+                            />
+                        </>
+                    ) : <span className="text-sm font-semibold text-primary">
                         {row.email.charAt(0).toUpperCase()}
-                    </span>
+                    </span>}
+
                 </div>
                 <div>
                     <h2 className="text-sm font-medium text-gray-800">
@@ -48,14 +87,35 @@ export const userscolumns: Column<IUser>[] = [
         )
     },
     {
+        key: 'status',
+        label: 'Status',
+        render: (row: any) => {
+            const status = row?.status?.toLowerCase() || "active";
+            const currentStatus = statusStyles[status] || statusStyles.active;
+            return (
+                <div
+                    className={`inline-flex items-center gap-x-2 px-3 py-1 rounded-full dark:bg-gray-800 ${currentStatus.bg}`}
+                >
+                    <span
+                        className={`h-1.5 w-1.5 rounded-full ${currentStatus.dot}`}
+                    ></span>
+
+                    <p className={`font-normal text-xs ${currentStatus.text}`}>
+                        {status.charAt(0).toUpperCase() + status.slice(1)}
+                    </p>
+                </div>
+            )
+        }
+    },
+    {
         key: 'role',
         label: 'Role',
         render: (row: any) => (
             <div className="flex items-center gap-x-2">
                 <p className="px-3 py-1 text-xs text-indigo-500 rounded-full dark:bg-gray-800 bg-indigo-100/60">
-                    {row.role.charAt(0).toUpperCase() + row.role.slice(1).toLowerCase()}
+                    {row?.role?.charAt(0).toUpperCase() + row?.role?.slice(1).toLowerCase()}
                 </p>
             </div>
         ),
-    }
+    },
 ]

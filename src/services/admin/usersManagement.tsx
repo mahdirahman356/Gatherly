@@ -48,6 +48,37 @@ export async function changeUserRole(
     }
 }
 
+
+export async function changeUserStatus(
+    userId: string,
+    status: string
+) {
+    try {
+        const response = await serverFetch.patch(
+            `/user/status/${userId}`,
+            {
+                body: JSON.stringify({ status }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        const result = await response.json();
+        console.log("User Data:" ,result)
+        return result;
+    } catch (error: any) {
+        console.error("Error changing user status:", error);
+        return {
+            success: false,
+            message:
+                process.env.NODE_ENV === "development"
+                    ? error.message
+                    : "Failed to change user staus",
+        };
+    }
+}
+
 export async function deleteUser(userId: string) {
     try {
         const response = await serverFetch.delete(`/user/${userId}`);

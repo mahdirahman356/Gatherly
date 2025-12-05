@@ -6,6 +6,8 @@ const ManageUserPage = async () => {
     const data = await getUsers()
     const usersData = data.data
 
+    console.log("usersData:", usersData)
+
     return (
         <div className="space-y-6">
             {/* Users Table */}
