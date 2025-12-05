@@ -6,15 +6,21 @@ export interface IJWTPayload {
    role: UserRole
 }
 
-export interface IUser {
-  id: number
-  name: string
-  email: string
-//   avatar: string
-  joinDate: string
-  eventsJoined: number
-  eventsHosted: number
-  location: string
-  status: string
-  role: string
+export interface IUserProfile {
+  id: string;
+  fullName: string;
+  image: string | null;
+  bio: string | null;
+  interests: string[];
+  location: string;
+  userId: string;
 }
+
+export interface IUser {
+  id: string;
+  email: string;
+  role: UserRole,
+  createdAt: string; // ISO Date string
+  profile: IUserProfile;
+}
+
