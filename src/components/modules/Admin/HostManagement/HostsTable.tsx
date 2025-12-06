@@ -2,15 +2,10 @@
 
 import ManagementTable from "@/components/shared/ManagementTable";
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { IUser } from "@/types/user.interface";
-// import { usersColumns } from "./usersColumns";
-import { toast } from "sonner";
-import { deleteUser } from "@/services/admin/usersManagement";
-import DeleteConfirmationDialog from "@/components/shared/DeleteConfirmationDialog";
-import { hostsColumns } from "./hostColumns";
-import UpdateUserDialog from "../UserManagement/UpdateUserDialog";
-// import UpdateUserDialog from "./UpdateUserDialog";
+import UpdateUserDialog from "@/components/shared/UpdateUserDialog";
+import { hostsColumns } from "./hostsColumns";
 
 interface UserTableProps {
     hosts: IUser[];
@@ -21,13 +16,6 @@ export default function HostTable({
 }: UserTableProps) {
     const router = useRouter();
     const [updatingHost, setUpdatingHost] = useState<IUser | null>(null);
-    const [, startTransition] = useTransition();
-
-    // const handleRefresh = () => {
-    //     startTransition(() => {
-    //         router.refresh();
-    //     });
-    // };
 
     const handleEditClick = (user: IUser) => {
         setUpdatingHost(user);
@@ -39,6 +27,7 @@ export default function HostTable({
 
     return (
         <>
+           {/* Table */}
             <ManagementTable
                 data={hosts}
                 columns={hostsColumns}

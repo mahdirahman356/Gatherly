@@ -35,7 +35,7 @@ function ManagementTable<T>({
     data = [], columns = [], onEdit, onDelete, onView,
 }: ManagementTableProps<T>) {
     console.log("data:", data)
-    const hasActions = onEdit || onDelete
+    const hasActions = onEdit || onDelete || onView
     return (
         <div className="overflow-x-auto">
             <Table>

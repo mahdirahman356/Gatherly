@@ -1,12 +1,13 @@
+import { IUser } from "./user.interface";
 
 export type EventStatus = "OPEN" | "FULL" | "CANCELLED" | "COMPLETED";
 
 export interface IEvent {
   id: string;
   title: string;
-  type: string; 
+  type: string;
   description: string;
-  date: string; 
+  date: string;
   location: string;
   image: string;
   minParticipants: number;
@@ -14,6 +15,10 @@ export interface IEvent {
   joiningFee: number;
   status: EventStatus;
   hostId: string;
-  createdAt: string; 
-  updatedAt: string; 
+  host: IUser,
+  _count: {
+    participants: number
+  }
+  createdAt: string;
+  updatedAt: string;
 }

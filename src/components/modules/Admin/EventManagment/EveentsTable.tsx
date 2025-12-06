@@ -4,22 +4,25 @@ import ManagementTable from "@/components/shared/ManagementTable";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { IUser } from "@/types/user.interface";
-import { usersColumns } from "./usersColumns";
 import { toast } from "sonner";
 import { deleteUser } from "@/services/admin/usersManagement";
 import DeleteConfirmationDialog from "@/components/shared/DeleteConfirmationDialog";
 import UpdateUserDialog from "@/components/shared/UpdateUserDialog";
+import { eventsColumns } from "./eventsColumns";
+import { IEvent } from "@/types/event.interface";
+import { deleteEvent } from "@/services/admin/eventsManagement";
+import UpdateEventDialog from "./UpdateEventDialog";
 
 interface UserTableProps {
-    users: IUser[];
+    events: IEvent[];
 }
 
-export default function UserTable({
-    users = [],
+export default function EventTable({
+    events = [],
 }: UserTableProps) {
     const router = useRouter();
-    const [updatingUser, setUpdatingUser] = useState<IUser | null>(null);
-    const [deletingUser, setDeletingUser] = useState<IUser | null>(null);
+    const [updatingEvent, setUpdatingEvent] = useState<IEvent | null>(null);
+    const [deletingEvent, setDeletingEvent] = useState<IEvent | null>(null);
     const [isDeleting, setIsDeleting] = useState(false);
     const [, startTransition] = useTransition();
 
@@ -29,51 +32,51 @@ export default function UserTable({
         });
     };
 
-    const handleEditClick = (user: IUser) => {
-        setUpdatingUser(user);
+    const handleEditClick = (event: IEvent) => {
+        setUpdatingEvent(event);
     };
 
-    const handleView = (user: IUser) => {
-         router.push(`/profile/${user.id}`)
+    const handleView = (event: IEvent) => {
+         router.push(`/events/${event.id}`)
     }
 
-    const handleDelete = (schedule: IUser) => {
-        setDeletingUser(schedule);
+    const handleDelete = (event: IEvent) => {
+        setDeletingEvent(event);
     };
 
     const confirmDelete = async () => {
-        if (!deletingUser) return;
+        if (!deletingEvent) return;
 
         setIsDeleting(true);
-        const result = await deleteUser(deletingUser.id);
+        const result = await deleteEvent(deletingEvent.id);
         setIsDeleting(false);
 
         if (result.success) {
-            toast.success(result.message || "User deleted successfully");
-            setDeletingUser(null);
+            toast.success(result.message || "Event deleted successfully");
+            setDeletingEvent(null);
             handleRefresh();
         } else {
-            toast.error(result.message || "Failed to delete user");
+            toast.error(result.message || "Failed to delete event");
         }
     };
 
     return (
         <>
             <ManagementTable
-                data={users}
-                columns={usersColumns}
+                data={events}
+                columns={eventsColumns}
                 onEdit={handleEditClick}
                 onView={handleView}
                 onDelete={handleDelete}
             />
 
             {/* Change Status Dialog */}
-            {updatingUser && (
-                <UpdateUserDialog
-                    user={updatingUser}
-                    isOpen={!!updatingUser}
+            {updatingEvent && (
+                <UpdateEventDialog
+                    event={updatingEvent}
+                    isOpen={!!updatingEvent}
                     onClose={() => {
-                        setUpdatingUser(null);
+                        setUpdatingEvent(null);
                         router.refresh();
                     }}
                 />
@@ -81,11 +84,11 @@ export default function UserTable({
 
             {/* Delete Confirmation Dialog */}
             <DeleteConfirmationDialog
-                open={!!deletingUser}
-                onOpenChange={(open) => !open && setDeletingUser(null)}
+                open={!!deletingEvent}
+                onOpenChange={(open) => !open && setDeletingEvent(null)}
                 onConfirm={confirmDelete}
-                title="Delete User"
-                description="Are you sure you want to delete this user? This action cannot be undone."
+                title="Delete Event"
+                description="Are you sure you want to delete this event? This action cannot be undone."
                 isDeleting={isDeleting}
             />
         </>

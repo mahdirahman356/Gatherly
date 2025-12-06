@@ -65,7 +65,7 @@ export const usersColumns: Column<IUser>[] = [
         key: 'profile',
         label: 'Location',
         render: (row) => (
-            <p className="font-medium">{row.profile.location}</p>
+            <p className="text-sm">{row.profile.location}</p>
         ),
     },
     {
@@ -73,7 +73,7 @@ export const usersColumns: Column<IUser>[] = [
         label: 'Join Date',
         render: (row) => (
             <div className="text-sm">
-                <p className="font-medium">
+                <p>
                     {format(
                         new Date(row.createdAt),
                         "MMM d, yyyy"
@@ -90,7 +90,7 @@ export const usersColumns: Column<IUser>[] = [
             const currentStatus = statusStyles[status] || statusStyles.active;
             return (
                 <div
-                    className={`inline-flex items-center gap-x-2 px-3 py-1 rounded-full dark:bg-gray-800 ${currentStatus.bg}`}
+                    className={`inline-flex items-center gap-x-2 px-3 py-1 rounded-full ${currentStatus.bg}`}
                 >
                     <span
                         className={`h-1.5 w-1.5 rounded-full ${currentStatus.dot}`}

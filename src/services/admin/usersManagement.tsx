@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { serverFetch } from "@/lib/server-fetch";
 
-
 export async function getUsers() {
     try {
         const response = await serverFetch.get(`/user?role=USER`);
@@ -16,6 +15,7 @@ export async function getUsers() {
         };
     }
 }
+
 export async function getHosts() {
     try {
         const response = await serverFetch.get(`/user?role=HOST`);
@@ -29,7 +29,6 @@ export async function getHosts() {
         };
     }
 }
-
 
 export async function changeUserRole(
     userId: string,
@@ -60,7 +59,6 @@ export async function changeUserRole(
         };
     }
 }
-
 
 export async function changeUserStatus(
     userId: string,

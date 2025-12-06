@@ -43,7 +43,7 @@ export const hostsColumns: Column<IUser>[] = [
         key: 'profile',
         label: 'Location',
         render: (row) => (
-            <p className="font-medium">{row.profile.location}</p>
+            <p className="text-sm">{row.profile.location}</p>
         ),
     },
     {
@@ -51,7 +51,7 @@ export const hostsColumns: Column<IUser>[] = [
         label: 'Join Date',
         render: (row) => (
             <div className="text-sm">
-                <p className="font-medium">
+                <p>
                     {format(
                         new Date(row.createdAt),
                         "MMM d, yyyy"
@@ -64,7 +64,7 @@ export const hostsColumns: Column<IUser>[] = [
         key: 'eventsCount',
         label: 'Total Events',
         render: (row) => (
-            <p className="font-medium">{row.eventsCount}</p>
+            <p className="text-sm">{row.eventsCount}</p>
         ),
     },
     {
