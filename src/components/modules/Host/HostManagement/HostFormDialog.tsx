@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/set-state-in-effect */
 "use client"
 import {
     Dialog,
@@ -14,11 +13,10 @@ import InputFieldError from "@/components/shared/InputFieldError";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { EventStatus, IEvent } from "@/types/event.interface";
+import { IEvent } from "@/types/event.interface";
 import { Textarea } from "@/components/ui/textarea";
 import { createEvent, updateEvent } from "@/services/host/eventManagement";
 import { format } from "date-fns";
-import { Label } from "@radix-ui/react-label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 
@@ -260,8 +258,6 @@ const HostFormDialog = ({
                         />
                         <InputFieldError state={state} field="image" />
                     </Field>
-                    {/* )} */}
-
                     {/* Submit Button */}
                     {isEdit
                         ? <Button type="submit" className="w-full">

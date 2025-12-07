@@ -9,7 +9,6 @@ import { IEvent } from "@/types/event.interface";
 import { deleteEvent } from "@/services/admin/eventsManagement";
 import { hostEventsColumns } from "./hostEventsColumns";
 import HostFormDialog from "./HostFormDialog";
-// import UpdateEventDialog from "./UpdateEventDialog";
 
 interface UserTableProps {
     events: IEvent[];
@@ -69,18 +68,6 @@ export default function HostEventsTable({
                 onView={handleView}
                 onDelete={handleDelete}
             />
-
-            {/* Change Status Dialog */}
-            {/* {updatingEvent && (
-                <UpdateEventDialog
-                    event={updatingEvent}
-                    isOpen={!!updatingEvent}
-                    onClose={() => {
-                        setUpdatingEvent(null);
-                        router.refresh();
-                    }}
-                />
-            )} */}
 
             <HostFormDialog
                 open={!!updatingEvent}
