@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+/* Hide ugly placeholder */
+input[type="datetime-local"]:not(:focus):not(:valid) {
+  color: transparent;
+}
 
+/* Show your custom placeholder */
+input[type="datetime-local"]:not(:focus):not(:valid)::before {
+  content: "Select date & time";
+  color: #9ca3af; /* Tailwind gray-400 */
+  position: absolute;
+}
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -66,6 +76,7 @@
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
+  --gray: #636E72;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);

@@ -6,8 +6,6 @@ const ManageEventsPage = async () => {
     const data = await getEvents()
     const eventsData = data.data
 
-    console.log("eventsData:", eventsData)
-
     return (
         <div className="space-y-6">
                    {/* Events Table */}

@@ -99,7 +99,7 @@ export default function UpdateEventDialog({
                         </p>
                     </div>
 
-                    {/* Change Role */}
+                    {/* Change Status */}
                     <div className="space-y-2">
                         <Label>Change Status</Label>
                         <Select
