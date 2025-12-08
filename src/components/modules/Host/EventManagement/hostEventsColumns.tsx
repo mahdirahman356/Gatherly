@@ -32,8 +32,8 @@ export const hostEventsColumns: Column<IEvent>[] = [
       <div className="flex items-center gap-x-2">
         <div className="h-12 w-12 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
           <Image
-            src={row.image}
-            alt={row.title}
+            src={row?.image}
+            alt={row?.title}
             width={48}
             height={48}
             className="object-cover w-12 h-12"

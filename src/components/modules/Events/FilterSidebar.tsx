@@ -31,6 +31,8 @@ export function FilterSidebar({
     'Tech & Networking',
     'Arts & Crafts',
     'Photography',
+    'Business',
+    'Technology',
     'Book Clubs',
     'Travel & Adventure',
   ]
@@ -43,13 +45,20 @@ export function FilterSidebar({
     'This Month',
   ]
   const locations = [
-    'All Locations',
-    'Downtown',
-    'North Side',
-    'South Side',
-    'East Side',
-    'West Side',
-    'Suburbs',
+    "All Locations",
+    "Dhaka",
+    "Chattogram",
+    "Sylhet",
+    "Rajshahi",
+    "Khulna",
+    "Barishal",
+    "Rangpur",
+    "Mymensingh",
+    "Gazipur",
+    "Narayanganj",
+    "Cumilla",
+    "Bogura",
+    "Cox's Bazar",
   ]
   const content = (
     <>
