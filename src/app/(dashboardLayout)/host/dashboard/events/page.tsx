@@ -1,5 +1,5 @@
-import HostEventsHeader from "@/components/modules/Host/HostManagement/HostEventsHeader";
-import HostEventsTable from "@/components/modules/Host/HostManagement/HostEventsTable";
+import HostEventsHeader from "@/components/modules/Host/EventManagement/HostEventsHeader";
+import HostEventsTable from "@/components/modules/Host/EventManagement/HostEventsTable";
 import { getHostEvents } from "@/services/host/eventManagement";
 
 const ManageEventPage = async () => {

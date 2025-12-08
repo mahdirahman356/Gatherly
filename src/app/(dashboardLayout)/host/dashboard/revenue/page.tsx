@@ -8,7 +8,7 @@ const RevenuePage = async () => {
     console.log("revenueData", revenueData)
     return (
         <div className="space-y-6">
-            {/* Users Table */}
+            {/* Event Revenue Table */}
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
                 <div className="p-6 border-b border-gray-200">
                     <h3 className="text-lg font-bold text-(--color-dark)">
