@@ -57,7 +57,7 @@ export default function ExploreEvents({ events }: { events: IEvent[] }) {
 
   return (
     <div className="min-h-screen bg-(--color-light-gray)">
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Explore Events</h1>
@@ -129,13 +129,13 @@ export default function ExploreEvents({ events }: { events: IEvent[] }) {
                 No events found.
               </p>
             ) : viewMode === "grid" ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-6">
                 {events.map((event) => (
                   <EventCard key={event.id} {...event} viewMode="grid" />
                 ))}
               </div>
             ) : (
-              <div className="space-y-6">
+              <div className="flex flex-col gap-6">
                 {events.map((event) => (
                   <EventCard key={event.id} {...event} viewMode="list" />
                 ))}

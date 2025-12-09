@@ -1,14 +1,7 @@
 // app/events/page.tsx
 import ExploreEvents from "@/components/modules/Events/ExploreEvents";
 import { queryStringFormatter } from "@/lib/formatters";
-import { getEvents } from "@/services/admin/eventsManagement";
-
-interface SearchParams {
-  type?: string;
-  date?: string;
-  location?: string;
-  search?: string;
-}
+import { getEvents } from "@/services/user/evenet.services";
 
 export default async function EventsPage({
   searchParams,

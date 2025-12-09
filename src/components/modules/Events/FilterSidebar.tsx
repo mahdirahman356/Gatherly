@@ -63,10 +63,10 @@ export function FilterSidebar({
   const content = (
     <>
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-[var(--color-dark)]">Filters</h2>
+        <h2 className="text-xl font-bold text-(--color-dark)">Filters</h2>
         {isMobileOpen && (
           <button onClick={onMobileClose} className="md:hidden">
-            <XIcon className="w-6 h-6 text-[var(--color-gray)]" />
+            <XIcon className="w-6 h-6 text-(--color-gray)" />
           </button>
         )}
       </div>
@@ -74,8 +74,8 @@ export function FilterSidebar({
       {/* Category Filter */}
       <div className="mb-8">
         <div className="flex items-center mb-3">
-          <TagIcon className="w-5 h-5 text-[var(--color-primary)] mr-2" />
-          <h3 className="font-semibold text-[var(--color-dark)]">Category</h3>
+          <TagIcon className="w-5 h-5 text-(--color-primary) mr-2" />
+          <h3 className="font-semibold text-(--color-dark)">Category</h3>
         </div>
         <div className="space-y-2">
           {categories.map((category) => (
@@ -90,7 +90,7 @@ export function FilterSidebar({
                 onChange={() => onCategoryChange(category)}
                 className="mr-3"
               />
-              <span className="text-sm text-[var(--color-gray)] group-hover:text-[var(--color-primary)] transition-colors">
+              <span className="text-sm text-(--color-gray) group-hover:text-(--color-primary) transition-colors">
                 {category}
               </span>
             </label>
@@ -101,8 +101,8 @@ export function FilterSidebar({
       {/* Date Filter */}
       <div className="mb-8">
         <div className="flex items-center mb-3">
-          <CalendarIcon className="w-5 h-5 text-[var(--color-primary)] mr-2" />
-          <h3 className="font-semibold text-[var(--color-dark)]">Date</h3>
+          <CalendarIcon className="w-5 h-5 text-(--color-primary) mr-2" />
+          <h3 className="font-semibold text-(--color-dark)">Date</h3>
         </div>
         <div className="space-y-2">
           {dates.map((date) => (
@@ -117,7 +117,7 @@ export function FilterSidebar({
                 onChange={() => onDateChange(date)}
                 className="mr-3"
               />
-              <span className="text-sm text-[var(--color-gray)] group-hover:text-[var(--color-primary)] transition-colors">
+              <span className="text-sm text-(--color-gray) group-hover:text-(--color-primary) transition-colors">
                 {date}
               </span>
             </label>
@@ -128,8 +128,8 @@ export function FilterSidebar({
       {/* Location Filter */}
       <div className="mb-8">
         <div className="flex items-center mb-3">
-          <MapPinIcon className="w-5 h-5 text-[var(--color-primary)] mr-2" />
-          <h3 className="font-semibold text-[var(--color-dark)]">Location</h3>
+          <MapPinIcon className="w-5 h-5 text-(--color-primary) mr-2" />
+          <h3 className="font-semibold text-(--color-dark)">Location</h3>
         </div>
         <div className="space-y-2">
           {locations.map((location) => (
@@ -144,7 +144,7 @@ export function FilterSidebar({
                 onChange={() => onLocationChange(location)}
                 className="mr-3"
               />
-              <span className="text-sm text-[var(--color-gray)] group-hover:text-[var(--color-primary)] transition-colors">
+              <span className="text-sm text-(--color-gray) group-hover:text-(--color-primary) transition-colors">
                 {location}
               </span>
             </label>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IUser } from "./user.interface";
 
 export type EventStatus = "OPEN" | "FULL" | "CANCELLED" | "COMPLETED";
@@ -16,6 +17,7 @@ export interface IEvent {
   status: EventStatus;
   hostId: string;
   host: IUser,
+  participants: any,
   _count: {
     participants: number
   }

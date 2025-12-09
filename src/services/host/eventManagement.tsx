@@ -7,7 +7,7 @@ import { createEventSchema, updateEventSchema } from "@/zod/event.validation";
 
 export async function getHostEvents() {
     try {
-        const response = await serverFetch.get(`/event/host-events`);
+        const response = await serverFetch.get(`/event/host/hosted-events`);
         const result = await response.json();
         return result;
     } catch (error: any) {

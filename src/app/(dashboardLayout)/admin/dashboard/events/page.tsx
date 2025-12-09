@@ -1,5 +1,5 @@
 import EventTable from "@/components/modules/Admin/EventManagment/EveentsTable";
-import { getEvents } from "@/services/admin/eventsManagement";
+import { getEvents } from "@/services/user/evenet.services";
 
 const ManageEventsPage = async () => {
 

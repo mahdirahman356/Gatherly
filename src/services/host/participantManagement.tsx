@@ -5,7 +5,7 @@ import { serverFetch } from "@/lib/server-fetch";
 
 export async function getParticipantsOfHost() {
     try {
-        const response = await serverFetch.get(`/event/host-participants`);
+        const response = await serverFetch.get(`/event/host/participants`);
         const result = await response.json();
         return result;
     } catch (error: any) {

@@ -54,9 +54,14 @@ function ManagementTable<T>({
                 </TableHeader>
                 <TableBody>
                     {data.length === 0 ? (
-                        <div className="text-center py-12 text-(--color-gray)">
-                            No data available
-                        </div>
+                        <tr>
+                            <td
+                                colSpan={columns.length}
+                                className="text-center py-12 text-(--color-gray)"
+                            >
+                                No data available
+                            </td>
+                        </tr>
                     ) : (
                         data.map((row, rowIndex) => (
                             <TableRow key={rowIndex}>

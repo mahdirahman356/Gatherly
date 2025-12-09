@@ -1,10 +1,14 @@
+import EventDetails from "@/components/modules/Events/EventDetails";
+import { getEventDetails } from "@/services/user/evenet.services";
 
-const EventDetailsPage = () => {
-    return (
-        <div>
-            Event Details Page
-        </div>
-    );
-};
+interface EventDetailsPageProps {
+    params: { id: string };
+}
 
-export default EventDetailsPage;
+export default async function EventDetailsPage({ params }: EventDetailsPageProps) {
+    const { id } = await params;
+    const result = await getEventDetails(id)
+    const event = result.data;
+
+    return <EventDetails {...event} />
+}

@@ -69,15 +69,24 @@ export default function EventCard({
               </div>
             </div>
 
-            {/* ✅ Host Info */}
+            {/*  Host Info */}
             <div className="flex items-center pt-4 border-t border-gray-100">
-              <Image
-                src={host?.profile?.image || "/avatar.png"}
-                alt={host?.profile?.fullName || "Host"}
-                className="w-10 h-10 rounded-full object-cover mr-3"
-                height={100}
-                width={100}
-              />
+              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                {host.profile.image ? (
+                  <>
+                    <Image
+                      src={host.profile.image}
+                      alt={host.profile.fullName}
+                      width={48}
+                      height={48}
+                      className="object-cover w-8 h-8 rounded-full"
+                    />
+                  </>
+                ) : <span className="text-sm font-semibold text-primary">
+                  {host?.profile?.fullName?.charAt(0)?.toUpperCase() || "?"}
+                </span>}
+              </div>
+
               <div>
                 <div className="text-xs text-(--color-gray)">Hosted by</div>
                 <div className="font-semibold text-sm text-(--color-dark)">
