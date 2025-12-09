@@ -50,3 +50,18 @@ export async function joinEvent(id: string) {
         };
     }
 }
+
+
+export async function getUpcomingEvemts(query?: string) {
+    try {
+        const response = await serverFetch.get(`/event/user/upcoming-events?type=${query}`);
+        const result = await response.json();
+        return result;
+    } catch (error: any) {
+        console.log(error);
+        return {
+            success: false,
+            message: `${process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'}`
+        };
+    }
+}

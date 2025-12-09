@@ -1,39 +1,5 @@
-import React from 'react'
 import { CalendarIcon, TrendingUpIcon, AwardIcon } from 'lucide-react'
-import { EventCard } from '@/components/shared/EventCard'
 export default function UserOverviewPage() {
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: 'Jazz Night at Blue Note',
-      category: 'Music',
-      image:
-        'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=800&h=600&fit=crop',
-      date: 'Fri, Dec 27',
-      time: '8:00 PM',
-      location: 'Blue Note Jazz Club',
-      attendees: 8,
-      maxAttendees: 20,
-      hostName: 'Marcus Chen',
-      hostAvatar:
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
-    },
-    {
-      id: 2,
-      title: 'Board Game Marathon',
-      category: 'Social',
-      image:
-        'https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=800&h=600&fit=crop',
-      date: 'Sun, Dec 29',
-      time: '2:00 PM',
-      location: 'Game Café Downtown',
-      attendees: 6,
-      maxAttendees: 10,
-      hostName: 'Emily Rodriguez',
-      hostAvatar:
-        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop',
-    },
-  ]
   return (
     <div className="space-y-6">
       {/* Stats Grid */}
@@ -79,16 +45,16 @@ export default function UserOverviewPage() {
       </div>
 
       {/* Upcoming Events */}
-      <div className="bg-white rounded-xl p-6 shadow-sm">
+      {/* <div className="bg-white rounded-xl p-6 shadow-sm">
         <h2 className="text-xl font-bold text-[(--color-dark)] mb-4">
           Your Next Events
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {upcomingEvents.map((event) => (
-            <EventCard key={event.id} {...event} />
+            <EventCard description={''} minParticipants={0} maxParticipants={0} joiningFee={0} status={'OPEN'} hostId={''} participants={undefined} createdAt={''} updatedAt={''} key={event.id} {...event} />
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Activity Summary */}
       <div className="bg-white rounded-xl p-6 shadow-sm">
