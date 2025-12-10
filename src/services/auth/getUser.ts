@@ -1,4 +1,4 @@
-"use server"
+// "use server"
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { getCookie } from "./tokenHandlers";

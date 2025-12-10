@@ -11,11 +11,12 @@ export interface IJWTPayload {
 export interface IUserProfile {
   id: string;
   fullName: string;
-  image: string | null;
-  bio: string | null;
+  image: string;
+  bio: string;
   interests: string[];
   location: string;
   userId: string;
+  createdAt?: string
 }
 
 export interface IUser {

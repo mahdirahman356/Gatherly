@@ -161,7 +161,7 @@ export default function EventCard({
               </span>
             </div>
           </div>
-          <SaveEventButton eventId={id}   defaultSaved={savedIds.includes(id)}/>
+          <SaveEventButton eventId={id}   defaultSaved={savedIds?.includes(id)}/>
         </div>
       </div>
   );

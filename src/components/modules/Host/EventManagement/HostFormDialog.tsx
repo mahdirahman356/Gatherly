@@ -221,14 +221,13 @@ const HostFormDialog = ({
                         <InputFieldError state={state} field="joiningFee" />
                     </Field>
 
-                    {/* {!isEdit && ( */}
                     <Field>
                         <FieldLabel htmlFor="file">Photo</FieldLabel>
 
                         {isEdit && event.image
                             ? <Image
                                 src={event?.image}
-                                alt="Profile Photo Preview"
+                                alt="event-image"
                                 width={50}
                                 height={50}
                                 className="mb-2 rounded-lg"

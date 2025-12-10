@@ -104,4 +104,4 @@ export async function toggleSaveEvent(id: string) {
 
 const data = await getSavedEvents()
 const savedEvents = data.data
-export const savedIds = savedEvents.map((s: { id: string; }) => s.id);
+export const savedIds = savedEvents?.map((s: { id: string; }) => s.id);

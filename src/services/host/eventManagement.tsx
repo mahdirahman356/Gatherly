@@ -121,8 +121,6 @@ export const updateEvent = async (id: string, _currentState: any, formData: any)
 
     const validatedPayload: any = zodValidator(payload, updateEventSchema);
 
-    console.log("validatedPayload:", validatedPayload)
-    console.log("payload:", payload)
 
     const backendPayload = {
         title: validatedPayload.data.title,
@@ -163,7 +161,7 @@ export const updateEvent = async (id: string, _currentState: any, formData: any)
             success: false, message:
                 `${process.env.NODE_ENV === 'development'
                     ? error.message
-                    : "Registration Failed. Please try again."}`
+                    : "Failed updating event. Please try again."}`
         };
     }
 
