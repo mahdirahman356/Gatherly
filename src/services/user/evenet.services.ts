@@ -51,8 +51,7 @@ export async function joinEvent(id: string) {
     }
 }
 
-
-export async function getUpcomingEvemts(query?: string) {
+export async function getUserEvents(query?: string) {
     try {
         const response = await serverFetch.get(`/event/user/upcoming-events?type=${query}`);
         const result = await response.json();
@@ -65,3 +64,44 @@ export async function getUpcomingEvemts(query?: string) {
         };
     }
 }
+
+export async function getSavedEvents() {
+    try {
+        const response = await serverFetch.get(`/event/saved/my-saved-events`);
+        const result = await response.json();
+        return result;
+    } catch (error: any) {
+        console.log(error);
+        return {
+            success: false,
+            message: `${process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'}`
+        };
+    }
+}
+
+
+export async function toggleSaveEvent(id: string) {
+    try {
+        const response = await serverFetch.post(`/event/saved/${id}`, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        const result = await response.json();
+        return result;
+    } catch (error: any) {
+        console.error("Error saving event:", error);
+        return {
+            success: false,
+            message:
+                process.env.NODE_ENV === "development"
+                    ? error.message
+                    : "Failed to save event",
+        };
+    }
+}
+
+const data = await getSavedEvents()
+const savedEvents = data.data
+export const savedIds = savedEvents.map((s: { id: string; }) => s.id);

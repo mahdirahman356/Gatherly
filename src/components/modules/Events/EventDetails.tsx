@@ -111,7 +111,7 @@ const EventDetails = ({ id, title, image, _count, date, description, host, joini
                                         Participants ({_count.participants})
                                     </h3>
 
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                         {participants.map((p: any) => (
                                             <div key={p.id} className="flex items-center gap-3">
                                                 <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">

@@ -1,17 +1,18 @@
+import EventJoinSuccess from "@/components/modules/User/Events/JoinSuccessCard";
 import { UserEvents } from "@/components/modules/User/Events/UserEvents";
-import { getUpcomingEvemts } from "@/services/user/evenet.services";
+import { getUserEvents } from "@/services/user/evenet.services";
 
 export default async function UpcomingEventPage() {
-    const data = await getUpcomingEvemts()
+    const data = await getUserEvents()
     const upcomingEvents = data.data
-    console.log(upcomingEvents)
 
     return (
-       <div className="space-y-6">
+        <div className="space-y-6">
+            <EventJoinSuccess />
             {/* Upcoming Events */}
-            <div className="overflow-hidden">
+            <div>
                 <div className="p-6">
-                    <h3 className="text-lg font-bold text-(--color-dark)">
+                    <h3 className="text-lg font-bold">
                         Upcoming Events
                     </h3>
                 </div>
