@@ -23,4 +23,5 @@ export interface IEvent {
   }
   createdAt: string;
   updatedAt: string;
+  reviews: any
 }

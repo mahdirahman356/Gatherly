@@ -6,7 +6,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
 }
 
-// ✅ forwardRef দিয়ে ref handle করা হচ্ছে
+//  handle using forwardRef
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, className = "", ...props }, ref) => {
     return (
@@ -17,7 +17,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           </label>
         )}
         <input
-          ref={ref} // ✅ ref is forwarded now
+          ref={ref} //  ref is forwarded now
           className={`w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-(--color-primary) transition-colors ${
             error ? "border-red-500" : ""
           } ${className}`}
@@ -29,4 +29,4 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-Input.displayName = "Input"; // ✅ displayName important for debugging & TS
+Input.displayName = "Input"; //  displayName important for debugging & TS

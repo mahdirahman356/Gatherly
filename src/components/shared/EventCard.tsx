@@ -24,7 +24,7 @@ export default function EventCard({
   _count,
   viewMode = "grid",
 }: EventCardProps) {
-  // ✅ Format date & time from backend datetime
+  //  Format date & time from backend datetime
   const formattedDate = format(new Date(date), "MMM dd, yyyy");
   const formattedTime = format(new Date(date), "hh:mm a");
 

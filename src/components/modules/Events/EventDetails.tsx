@@ -2,19 +2,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IEvent } from "@/types/event.interface";
 import Image from "next/image";
-import { MapPinIcon, CalendarIcon, ClockIcon, UsersIcon, CheckCircle2, Loader2 } from "lucide-react";
+import { MapPinIcon, CalendarIcon, ClockIcon, UsersIcon, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { useState } from "react";
 import { joinEvent } from "@/services/user/evenet.services";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import ReviewDialog from "../User/Events/ReviewDialog";
 
+interface EventDetailsProps extends IEvent {
+    userId: string;
+}
 
-const EventDetails = ({ id, title, image, _count, date, description, host, joiningFee, location, maxParticipants, status, type, participants }: IEvent) => {
+const EventDetails = ({ id, title, image, _count, date, description, host, joiningFee, location, maxParticipants, status, type, participants, reviews, userId }: EventDetailsProps) => {
     const formattedDate = format(new Date(date), "MMM dd, yyyy");
     const formattedTime = format(new Date(date), "hh:mm a");
+    const [showReviewDialog, setShowReviewDialog] = useState(false);
 
+    const isCompleted = status === "COMPLETED";
+    const isAlreadyReviewed = reviews?.some(
+        (review: any) => review.userId === userId
+    );
+    const canReview = isCompleted && !isAlreadyReviewed;
 
     const [isJoining, setIsJoining] = useState(false);
 
@@ -48,7 +59,7 @@ const EventDetails = ({ id, title, image, _count, date, description, host, joini
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                    {/* ✅ LEFT SIDE — MAIN EVENT INFO */}
+                    {/* LEFT SIDE — MAIN EVENT INFO */}
                     <div className="lg:col-span-2 space-y-6">
 
                         {/* Event Image */}
@@ -102,7 +113,7 @@ const EventDetails = ({ id, title, image, _count, date, description, host, joini
                             </p>
                         </div>
 
-                        {/* ✅ PARTICIPANTS LIST */}
+                        {/* PARTICIPANTS LIST */}
                         <div className="bg-white rounded-xl shadow-sm p-6">
                             {_count.participants === 0
                                 ? <p className="text-center my-6 text-gray-500">No participants joined yet</p>
@@ -140,10 +151,37 @@ const EventDetails = ({ id, title, image, _count, date, description, host, joini
                         </div>
                     </div>
 
-                    {/* ✅ RIGHT SIDE — HOST + JOIN + FEE + STATUS IN ONE CARD */}
+                    {/* RIGHT SIDE — HOST + JOIN + FEE + STATUS IN ONE CARD */}
                     <div className="space-y-6">
 
                         <div className="bg-white rounded-xl shadow-sm p-6 space-y-6">
+
+                            {/* Review Notification - Only show if can review (completed but no review) */}
+                            {canReview && (
+                                <Card className="border-amber-200 bg-amber-50">
+                                    <CardContent className="pt-6">
+                                        <div className="flex items-start gap-3">
+                                            <AlertCircle className="h-5 w-5 text-amber-600 mt-0.5" />
+                                            <div className="flex-1">
+                                                <h3 className="font-semibold text-amber-900">
+                                                    Review This Event
+                                                </h3>
+                                                <p className="text-sm text-amber-700 mt-1">
+                                                    Your Event has been completed. Share your experience by
+                                                    leaving a review for {title} event.
+                                                </p>
+                                                <Button
+                                                    onClick={() => setShowReviewDialog(true)}
+                                                    className="mt-3"
+                                                    size="sm"
+                                                >
+                                                    Write a Review
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            )}
 
                             {/* EVENT STATUS */}
                             <div className="flex justify-between items-center">
@@ -248,6 +286,15 @@ const EventDetails = ({ id, title, image, _count, date, description, host, joini
 
                 </div>
             </div>
+            {/* Review Dialog */}
+            {canReview && (
+                <ReviewDialog
+                    isOpen={showReviewDialog}
+                    onClose={() => setShowReviewDialog(false)}
+                    eventId={id}
+                    eventName={title}
+                />
+            )}
         </div>
     );
 };
