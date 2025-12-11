@@ -1,11 +1,11 @@
 "use server"
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { serverFetch } from "@/lib/server-fetch";
 import { loginValidationZodSchema } from "@/zod/auth.validation";
 import { parse } from "cookie";
 import { redirect } from "next/navigation";
 import { setCookie } from "./tokenHandlers";
 import { zodValidator } from "@/lib/zodValidator";
+import { serverFetchPost } from "@/lib/server-fetch";
 
 
 
@@ -24,7 +24,7 @@ export const loginUser = async (_currentState: any, formData: any): Promise<any>
 
         const validatedPayload = zodValidator(payload, loginValidationZodSchema).data;
 
-        const res = await serverFetch.post("/auth/login", {
+        const res = await serverFetchPost("/auth/login", {
             body: JSON.stringify(validatedPayload),
             headers: {
                 "Content-Type": "application/json",

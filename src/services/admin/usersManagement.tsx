@@ -1,10 +1,10 @@
 "use server"
+import { serverFetchDelete, serverFetchGet, serverFetchPatch } from "@/lib/server-fetch";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { serverFetch } from "@/lib/server-fetch";
 
 export async function getUsers() {
     try {
-        const response = await serverFetch.get(`/user?role=USER`);
+        const response = await serverFetchGet(`/user?role=USER`);
         const result = await response.json();
         return result;
     } catch (error: any) {
@@ -18,7 +18,7 @@ export async function getUsers() {
 
 export async function getHosts() {
     try {
-        const response = await serverFetch.get(`/user?role=HOST`);
+        const response = await serverFetchGet(`/user?role=HOST`);
         const result = await response.json();
         return result;
     } catch (error: any) {
@@ -35,7 +35,7 @@ export async function changeUserRole(
     role: string
 ) {
     try {
-        const response = await serverFetch.patch(
+        const response = await serverFetchPatch(
             `/user/change-role/${userId}`,
             {
                 body: JSON.stringify({ role }),
@@ -65,7 +65,7 @@ export async function changeUserStatus(
     status: string
 ) {
     try {
-        const response = await serverFetch.patch(
+        const response = await serverFetchPatch(
             `/user/status/${userId}`,
             {
                 body: JSON.stringify({ status }),
@@ -90,9 +90,53 @@ export async function changeUserStatus(
     }
 }
 
+export async function getPendingHostRequests() {
+    try {
+        const response = await serverFetchGet(`/user/admin/host-requests`);
+        const result = await response.json();
+        return result;
+    } catch (error: any) {
+        console.log(error);
+        return {
+            success: false,
+            message: `${process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'}`
+        };
+    }
+}
+
+export async function changeHostRequestStatus(
+    hostRequestId: string,
+    status: string
+) {
+    try {
+        const response = await serverFetchPatch(
+            `/user/admin/host-request/${hostRequestId}`,
+            {
+                body: JSON.stringify({ status }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        const result = await response.json();
+        console.log("Host Request Data:" ,result)
+        return result;
+    } catch (error: any) {
+        console.error("Error changing host request status:", error);
+        return {
+            success: false,
+            message:
+                process.env.NODE_ENV === "development"
+                    ? error.message
+                    : "Failed to change host request status",
+        };
+    }
+}
+
 export async function deleteUser(userId: string) {
     try {
-        const response = await serverFetch.delete(`/user/${userId}`);
+        const response = await serverFetchDelete(`/user/${userId}`);
         const result = await response.json();
 
         return {

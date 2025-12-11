@@ -1,13 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+"use server"
+import { serverFetchDelete, serverFetchPatch } from "@/lib/server-fetch";
 
-import { serverFetch } from "@/lib/server-fetch";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export async function changeEventStatus(
     eventId: string,
     status: string
 ) {
     try {
-        const response = await serverFetch.patch(
+        const response = await serverFetchPatch(
             `/event/status/${eventId}`,
             {
                 body: JSON.stringify({ status }),
@@ -34,7 +35,7 @@ export async function changeEventStatus(
 
 export async function deleteEvent(eventId: string) {
     try {
-        const response = await serverFetch.delete(`/event/${eventId}`);
+        const response = await serverFetchDelete(`/event/${eventId}`);
         const result = await response.json();
 
         console.log("result:", result)

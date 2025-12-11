@@ -2,10 +2,11 @@ import { IEvent } from "./event.interface";
 
 export type UserRole = "ADMIN" | "USER" | "HOST"
 export type UserStatus = "ACTIVE" | "INACTIVE" | "BLOCK" | "DELETED"
+export type HostRequestStatus = "PENDING" | "APPROVED" | "REJECTED"
 
 export interface IJWTPayload {
-   email: string,
-   role: UserRole
+  email: string,
+  role: UserRole
 }
 
 export interface IUserProfile {
@@ -19,12 +20,20 @@ export interface IUserProfile {
   createdAt?: string
 }
 
+export interface IHostRequest {
+  id: string,
+  userId: string,
+  user: IUser
+  status: HostRequestStatus,
+  createdAt: string,
+}
+
 export interface IUser {
   id: string;
   email: string;
   role: UserRole,
   status: UserStatus,
-  createdAt: string; 
+  createdAt: string;
   profile: IUserProfile;
   events: IEvent,
   eventsCount: number

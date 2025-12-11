@@ -1,8 +1,8 @@
 "use client"
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { IUserProfile, UserRole } from "@/types/user.interface";
-import { CalendarIcon, EditIcon, MapPinIcon } from "lucide-react";
+import { IHostRequest, IUserProfile, UserRole } from "@/types/user.interface";
+import { AlertCircle, CalendarIcon, EditIcon, MapPinIcon } from "lucide-react";
 import Image from "next/image";
 import { format } from "date-fns";
 import { useState, useTransition } from "react";
@@ -15,14 +15,15 @@ interface ProfileHeaderProps {
         profile: IUserProfile,
         totalEvents: number,
         createdAt: string,
-        role: UserRole
+        role: UserRole,
+        hostRequest: IHostRequest[]
     },
     currentUserId: string
 }
 
 const ProfileHeader = ({ profile, currentUserId }: ProfileHeaderProps) => {
     const { fullName, image, bio, interests, location } = profile.profile
-
+    
     const isOwnProfile = currentUserId === profile.id;
     const router = useRouter();
     const [, startTransition] = useTransition();
@@ -50,6 +51,18 @@ const ProfileHeader = ({ profile, currentUserId }: ProfileHeaderProps) => {
                 profile={profile.profile}
             />
             <div className="bg-white rounded-2xl shadow-sm p-8 mb-8">
+                {profile?.hostRequest?.[0]?.status
+                    && <div className="flex items-start gap-3 mb-8">
+                        <AlertCircle className="h-5 w-5 text-amber-600 mt-0.5" />
+                        <div className="flex-1">
+                            <h3 className="text-sm text-amber-900">
+                                {profile?.hostRequest?.[0]?.status === "PENDING" 
+                                && "Your host request is pending approval"}
+                                {profile?.hostRequest?.[0]?.status === "REJECTED" 
+                                && "Your request was rejected"}
+                            </h3>
+                        </div>
+                    </div>}
                 <div className="flex flex-col md:flex-row gap-8">
                     {/* Avatar */}
                     <div className="shrink-0">

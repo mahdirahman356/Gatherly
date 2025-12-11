@@ -12,12 +12,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ReviewDialog from "../User/Events/ReviewDialog";
 import Link from "next/link";
+import { UserRole } from "@/types/user.interface";
 
 interface EventDetailsProps extends IEvent {
     userId: string;
+    role: UserRole
 }
 
-const EventDetails = ({ id, title, image, _count, date, description, host, joiningFee, location, maxParticipants, status, type, participants, reviews, userId }: EventDetailsProps) => {
+const EventDetails = ({ id, title, image, _count, date, description, host, joiningFee, location, maxParticipants, status, type, participants, reviews, userId, role }: EventDetailsProps) => {
     const formattedDate = format(new Date(date), "MMM dd, yyyy");
     const formattedTime = format(new Date(date), "hh:mm a");
     const [showReviewDialog, setShowReviewDialog] = useState(false);
@@ -26,7 +28,10 @@ const EventDetails = ({ id, title, image, _count, date, description, host, joini
     const isAlreadyReviewed = reviews?.some(
         (review: any) => review.userId === userId
     );
-    const canReview = isCompleted && !isAlreadyReviewed;
+    const isParticipant = participants?.some(
+        (p: any) => p.userId === userId
+    );
+    const canReview = isCompleted && !isAlreadyReviewed && !isParticipant && role === "USER"
 
     const [isJoining, setIsJoining] = useState(false);
 
@@ -228,7 +233,7 @@ const EventDetails = ({ id, title, image, _count, date, description, host, joini
                                 </span>
                             </div>
                             {/* HOST INFO */}
-                            <div>
+                            <Link href={`/profile/${host.id}`}>
                                 <div className="flex items-center gap-3">
                                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
                                         {host.profile.image ? (
@@ -255,10 +260,10 @@ const EventDetails = ({ id, title, image, _count, date, description, host, joini
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
 
                             {/* JOIN / LEAVE BUTTON */}
-                            <div className="pt-4 border-t space-y-2">
+                            <div className="pt-4 space-y-2">
 
                                 {/* SHOW THIS IF NOT JOINED */}
                                 <Button

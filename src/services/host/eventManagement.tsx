@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
-import { serverFetch } from "@/lib/server-fetch";
+import { serverFetchGet, serverFetchPatch, serverFetchPost } from "@/lib/server-fetch";
 import { zodValidator } from "@/lib/zodValidator";
 import { createEventSchema, updateEventSchema } from "@/zod/event.validation";
 
 
 export async function getHostEvents() {
     try {
-        const response = await serverFetch.get(`/event/host/hosted-events`);
+        const response = await serverFetchGet(`/event/host/hosted-events`);
         const result = await response.json();
         return result;
     } catch (error: any) {
@@ -68,7 +68,7 @@ export const createEvent = async (_currentState: any, formData: any): Promise<an
     newFormData.append("file", formData.get("file") as Blob)
     try {
 
-        const response = await serverFetch.post("/event", {
+        const response = await serverFetchPost("/event", {
             body: newFormData,
         })
 
@@ -144,7 +144,7 @@ export const updateEvent = async (id: string, _currentState: any, formData: any)
     }
     try {
 
-        const response = await serverFetch.patch(`/event/update-event/${id}`, {
+        const response = await serverFetchPatch(`/event/update-event/${id}`, {
             body: newFormData,
         })
 

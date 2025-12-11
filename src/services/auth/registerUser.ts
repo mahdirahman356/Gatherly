@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
-import { serverFetch } from "@/lib/server-fetch";
 import { loginUser } from "./loginUser";
 import { registerValidationZodSchema } from "@/zod/auth.validation";
 import { zodValidator } from "@/lib/zodValidator";
+import { serverFetchPost } from "@/lib/server-fetch";
 
 export const registerUser = async (_currentState: any, formData: any): Promise<any> => {
 
@@ -22,7 +22,7 @@ export const registerUser = async (_currentState: any, formData: any): Promise<a
 
         const validatedPayload = zodValidator(payload, registerValidationZodSchema).data;
 
-        const res = await serverFetch.post(`/user`, {
+        const res = await serverFetchPost(`/user`, {
             body: JSON.stringify(validatedPayload),
             headers: {
                 "Content-Type": "application/json",

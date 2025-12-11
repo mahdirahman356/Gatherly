@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DashboardNavItem } from "@/types/dashboard.interface";
 import { IJWTPayload } from "@/types/user.interface";
-import { BarChart3Icon, BookmarkIcon, CalendarIcon, DollarSignIcon, HistoryIcon, LayoutDashboardIcon, SettingsIcon, ShieldIcon, UsersIcon } from "lucide-react";
+import { BarChart3Icon, BookmarkIcon, CalendarIcon, DollarSignIcon, HistoryIcon, Inbox, LayoutDashboardIcon, SettingsIcon, ShieldIcon, UsersIcon } from "lucide-react";
 
 interface DashboardSidebarContentProps {
     userInfo: IJWTPayload;
@@ -27,6 +27,7 @@ const DashboardSidebarContent = ({
         shield: ShieldIcon,
         dollar: DollarSignIcon,
         analytics: BarChart3Icon,
+        inbox: Inbox
     };
 
     return (
@@ -80,32 +81,6 @@ const DashboardSidebarContent = ({
                     </ul>
                 </nav>
             </ScrollArea>
-
-            <div className="p-4 border-t border-gray-200">
-                <div className="bg-gray-200 rounded-lg p-4">
-
-                    <div className="text-xs text-(--color-gray) mb-2">
-                        Quick Stats
-                    </div>
-                    {/* {userInfo === 'USER' && ( */}
-                    <div className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                            <span className="text-(--color-gray)">Events Joined</span>
-                            <span className="font-semibold text-(--color-dark)">
-                                156
-                            </span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                            <span className="text-(--color-gray)">This Month</span>
-                            <span className="font-semibold text-(--color-dark)">
-                                12
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {/* )} */}
-
             {/* User Info at Bottom */}
             <div className="border-t p-4">
                 <div className="flex items-center gap-3">

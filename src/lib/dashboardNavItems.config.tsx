@@ -15,7 +15,6 @@ const userDashboardNavItems: DashboardNavItem[] = [
       label: 'Upcoming',
       icon: "calendar",
       path: '/dashboard/upcoming',
-      badge: 3,
     },
     {
       id: 'past',
@@ -28,7 +27,6 @@ const userDashboardNavItems: DashboardNavItem[] = [
       label: 'Saved Events',
       icon: "bookmark",
       path: '/dashboard/saved',
-      badge: 5,
     },
     {
       id: 'settings',
@@ -49,7 +47,6 @@ const hostDashboardNavItems: DashboardNavItem[] = [
       label: 'My Events',
       icon: "calendar",
       path: '/host/dashboard/events',
-      badge: 8,
     },
     {
       id: 'participants',
@@ -88,21 +85,24 @@ const adminDashboardNavItems: DashboardNavItem[] = [
       label: 'Manage Users',
       icon: "users",
       path: '/admin/dashboard/users',
-      badge: 1247,
     },
     {
       id: 'hosts',
       label: 'Manage Hosts',
       icon: "shield",
       path: '/admin/dashboard/hosts',
-      badge: 89,
     },
     {
       id: 'events',
       label: 'Manage Events',
       icon: "calendar",
       path: '/admin/dashboard/events',
-      badge: 342,
+    },
+    {
+      id: 'pandings',
+      label: 'Pending Hosts',
+      icon: "inbox",
+      path: '/admin/dashboard/pending-hosts',
     },
     {
       id: 'reports',

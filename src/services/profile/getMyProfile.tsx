@@ -1,12 +1,13 @@
+"use server"
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { serverFetch } from "@/lib/server-fetch";
+import { serverFetchGet, serverFetchPatch } from "@/lib/server-fetch";
 import { zodValidator } from "@/lib/zodValidator";
 import { updateUserSchema } from "@/zod/user.validation";
 
 
 export async function getMyProfile() {
     try {
-        const response = await serverFetch.get(`/user/my-profile`);
+        const response = await serverFetchGet(`/user/my-profile`);
         const result = await response.json();
         return result;
     } catch (error: any) {
@@ -29,10 +30,10 @@ export const updateProfile = async (_currentState: any, formData: any): Promise<
     const file = formData.get("file");
 
     const payload = {
-        fullName: formData.get('fullName'),
-        bio: formData.get('bio'),
-        interests: interestsValue,
-        location: formData.get("location") as File
+        fullName: formData.get('fullName') as string,
+        bio: formData.get('bio') as string,
+        interests: interestsValue as string[],
+        location: formData.get("location") as string
     }
 
     if (zodValidator(payload, updateUserSchema).success === false) {
@@ -49,12 +50,12 @@ export const updateProfile = async (_currentState: any, formData: any): Promise<
 
      try {
 
-        const response = await serverFetch.patch(`/user/update-profile`, {
-            body: newFormData,
+        const response = await serverFetchPatch(`/user/update-profile`, {
+            body: newFormData
         })
 
         const result = await response.json();
-        console.log(result)
+        console.log("result", result)
         return result
 
     } catch (error: any) {

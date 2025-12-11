@@ -3,12 +3,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { UserEvents } from "./UserEvents";
+import { IEvent } from "@/types/event.interface";
 
-const EventJoinSuccess = () => {
-     const searchParams = useSearchParams();
+interface EventsProps {
+    events: IEvent[];
+}
+
+const EventJoinSuccess = ({ events = [] }: EventsProps) => {
+    const searchParams = useSearchParams();
     const router = useRouter();
 
-     const paymentStatus = searchParams.get("payment");
+    const paymentStatus = searchParams.get("payment");
     const [showSuccess, setShowSuccess] = useState(false);
 
     useEffect(() => {
@@ -18,7 +24,7 @@ const EventJoinSuccess = () => {
 
             setTimeout(() => {
                 setShowSuccess(false);
-                router.replace("/dashboard/upcoming"); 
+                router.replace("/dashboard/upcoming");
             }, 2000);
         }
     }, [paymentStatus, router]);
@@ -57,6 +63,19 @@ const EventJoinSuccess = () => {
             </div>
         );
     }
+
+    return (
+        <div className="space-y-6">
+            <div>
+                <div className="p-6">
+                    <h3 className="text-lg font-bold">
+                        Upcoming Events
+                    </h3>
+                </div>
+                <UserEvents events={events} />
+            </div>
+        </div>
+    )
 };
 
 export default EventJoinSuccess;

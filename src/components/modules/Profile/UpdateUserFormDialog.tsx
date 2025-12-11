@@ -37,6 +37,8 @@ const UpdateUserFormDialog = ({
         { message: null }
     );
 
+    console.log("state", state)
+
     const formRef = useRef<HTMLFormElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -73,7 +75,6 @@ const UpdateUserFormDialog = ({
                 onClose();
             } else if (!state.success) {
                 toast.error(state.message);
-
                 if (selectedFile && fileInputRef.current) {
                     const dataTransfer = new DataTransfer();
                     dataTransfer.items.add(selectedFile);

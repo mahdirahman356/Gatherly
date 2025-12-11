@@ -10,6 +10,7 @@ const userNavItems = [
     { href: "/events", label: "Explore Events" },
     { href: "/dashboard/upcoming", label: "My Events" },
     { href: "/profile", label: "Profile" },
+    { href: "/become-host", label: "Become Host" },
 ];
 const hostNavItems = [
     { href: "/", label: "Home" },
@@ -27,7 +28,7 @@ const adminNavItems = [
     { href: "/admin/dashboard", label: "Admin Dashboard" },
 ];
 
-export const getNavItemsByRole  = (role: UserRole) => {
+export const getNavItemsByRole = (role: UserRole) => {
     switch (role) {
         case "ADMIN":
             return [...adminNavItems];

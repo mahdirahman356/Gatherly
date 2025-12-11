@@ -10,8 +10,9 @@ export default async function EventDetailsPage({ params }: EventDetailsPageProps
     const { id } = await params;
     const result = await getEventDetails(id)
     const userData = await getMyProfile()
-    const userId = userData?.data?.id
+    const {id: userId, role} = userData?.data?.id
     const event = result.data;
 
-    return <EventDetails {...event} userId={userId} />
+
+    return <EventDetails {...event} userId={userId} role={role} />
 }
