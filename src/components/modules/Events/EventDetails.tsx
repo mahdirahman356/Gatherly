@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ReviewDialog from "../User/Events/ReviewDialog";
+import Link from "next/link";
 
 interface EventDetailsProps extends IEvent {
     userId: string;
@@ -124,27 +125,29 @@ const EventDetails = ({ id, title, image, _count, date, description, host, joini
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                         {participants.map((p: any) => (
-                                            <div key={p.id} className="flex items-center gap-3">
-                                                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
-                                                    {p.user.profile.image ? (
-                                                        <Image
-                                                            src={p.user.profile.image}
-                                                            alt={p.user.profile.fullName}
-                                                            width={40}
-                                                            height={40}
-                                                            className="w-10 h-10 object-cover rounded-full"
-                                                        />
-                                                    ) : (
-                                                        <span className="text-sm font-semibold text-primary">
-                                                            {p.user.profile.fullName?.charAt(0).toUpperCase()}
-                                                        </span>
-                                                    )}
-                                                </div>
+                                            <Link href={`/profile/${p.user.id}`} key={p.id}>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+                                                        {p.user.profile.image ? (
+                                                            <Image
+                                                                src={p.user.profile.image}
+                                                                alt={p.user.profile.fullName}
+                                                                width={40}
+                                                                height={40}
+                                                                className="w-10 h-10 object-cover rounded-full"
+                                                            />
+                                                        ) : (
+                                                            <span className="text-sm font-semibold text-primary">
+                                                                {p.user.profile.fullName?.charAt(0).toUpperCase()}
+                                                            </span>
+                                                        )}
+                                                    </div>
 
-                                                <p className="text-sm font-medium text-(--color-dark)">
-                                                    {p.user.profile.fullName}
-                                                </p>
-                                            </div>
+                                                    <p className="text-sm font-medium text-(--color-dark)">
+                                                        {p.user.profile.fullName}
+                                                    </p>
+                                                </div>
+                                            </Link>
                                         ))}
                                     </div>
                                 </div>}
