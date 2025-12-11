@@ -1,3 +1,4 @@
+import HostReviews from '@/components/modules/Profile/HostReviews'
 import ProfileHeader from '@/components/modules/Profile/ProfileHeader'
 import EventCard from '@/components/shared/EventCard'
 import { getMyProfile } from '@/services/profile/getMyProfile'
@@ -5,15 +6,21 @@ import { IEvent } from '@/types/event.interface'
 
 export default async function ProfilePage() {
   const data = await getMyProfile()
-  const { events, ...profile } = data.data
+  const { events, reviews, ...profile } = data.data
   const userData = await getMyProfile()
   const currentUserId = userData?.data?.id
+  console.log("reviews", reviews)
   return (
     <div className="min-h-screen bg-(--color-light-gray)">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {/* Profile Header */}
         <ProfileHeader profile={profile} currentUserId={currentUserId} />
+        
+        {/* Host reviews */}
+        {reviews.length > 0 &&
+          <HostReviews HostReviews={reviews} />}
+
         {/* Events */}
         <div>
           {events
