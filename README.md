@@ -3,7 +3,7 @@
 **Connecting people based on shared interests and activities. Never go to an event alone again!**
 
 ##  Live URL
-* (`https://events-activities-platform.vercel.app`)
+* (`https://gatherly-plum.vercel.app`)
 
 ---
 
@@ -45,7 +45,7 @@ This project requires a robust full-stack implementation. The suggested stack en
 | **Database** |  PostgreSQL (SQL) |
 | **Authentication** |  JWT, bcrypt |
 | **File Storage** |  Cloudinary  |
-| **Deployment** | Vercel |
+| **Deployment** | Render |
 
 ### Payment Gateways
 * Stripe 
