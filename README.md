@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gatherly
 
-## Getting Started
+**Connecting people based on shared interests and activities. Never go to an event alone again!**
 
-First, run the development server:
+##  Live URL
+* (`https://events-activities-platform.vercel.app`)
 
+---
+
+##  Features
+
+The Events & Activities Platform is a full-stack social platform designed to bridge the gap between online discovery and offline participation. It facilitates real-world social interactions by connecting individuals who want to participate in local events, sports, or hobbies but lack companions.
+
+### Core Functionality
+* **Event & Activity Management :** Hosts can create, manage, and track all details of their events, including type, date, location, required participants, and joining fees.
+* **Advanced Search & Matching:** Users can easily find relevant events using filters for **Category/Type**, **Date**, and **Location**.
+* **Secure Payment Integration:** Seamless handling of ticket/joining fees for paid events via integrated payment gateways.
+* **User & Host Dashboards:** Personalized dashboards providing users with a view of upcoming/past joined events, and hosts with participant management, event tracking, and revenue data.
+* **Robust Review & Rating System:** Users can rate and review hosts (1–5 stars) after event completion, ensuring quality and trust within the community.
+
+### User System
+* **Role-Based Authentication:** Distinct permissions and access levels for **User**, **Host**, and **Admin**.
+* **Secure Authentication:** Utilizes **JWT (JSON Web Tokens)** for secure, sessionless authentication and secure password hashing.
+* **Comprehensive Profile Management (CRUD):** Users and Hosts can create and edit profiles, including **Full Name**, **Bio**, **Location**, and **Interests**, which are visible to the community to facilitate compatibility.
+* **Cloud-Based Image Hosting:** Integration for profile images and event banners.
+s
+---
+
+## Technology Stack
+
+This project requires a robust full-stack implementation. The suggested stack ensures a scalable, secure, and modern application.
+
+### Frontend
+| Technology | Description |
+| :--- | :--- |
+| **Framework** | Next.js |
+| **Styling** | Tailwind CSS / shadcn 
+| **Deployment** | Vercel |
+
+### Backend
+| Technology | Description |
+| :--- | :--- |
+| **Runtime** | Node.js  |
+| **Framework** | Express.js / NestJS |
+| **Database** |  PostgreSQL (SQL) |
+| **Authentication** |  JWT, bcrypt |
+| **File Storage** |  Cloudinary  |
+| **Deployment** | Vercel |
+
+### Payment Gateways
+* Stripe 
+
+---
+
+##  Setup & Usage Instructions
+
+Follow these steps to set up the project locally.
+
+### Prerequisites
+* Node.js (version 18+)
+* [PostgreSQL] installed or a cloud service account 
+
+### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone [https://github.com/mahdirahman356/Gatherly.git]
+cd events-activities-platform
